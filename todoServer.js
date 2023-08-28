@@ -44,6 +44,8 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const todoList = require('./todo-list');
 const todoTask = require('./todo-task');
+const path = require('path');
+const cors = require('cors');
 
 const todoListInstance = new todoList();
 
@@ -51,6 +53,7 @@ const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 // Route and function that gets array containing all to do tasks.
 app.get("/todos", (req, res) => {
@@ -144,6 +147,10 @@ app.delete("/todos/:id", (req, res) => {
     }
   }
 });
+
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "index.html"));
+// });
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
